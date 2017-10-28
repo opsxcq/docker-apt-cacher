@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM debian:9.2
 
 LABEL maintainer "opsxcq@strm.sh"
 
