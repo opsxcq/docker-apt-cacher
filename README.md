@@ -1,19 +1,11 @@
-# Apt-get cache
+# Apt-get cacher
 
-How to build your image using cache (can break other things that use http_proxy)
+Transparently intercept calls to `deb.debian.org` and cache them.
 
-```
-docker build -t imageName --build-arg http_proxy=http://cache:3142/ .
-```
-
-How to use it as a cache (invasive way), add to `/etc/apt/conf.d/01pr` this line
+When running containers, link it like
 
 ```
-Acquire::http { Proxy "http://cache:3142"; };
+docker run --rm -it --link apt-cache:deb.debian.org --entrypoint /bin/bash debian:9.2
 ```
 
-Or in the form of a one-liner
-
-```
-echo 'Acquire::http { Proxy "http://cache:3142"; };' >> /etc/apt/conf.d/01pr
-```
+Considering that previously you started this container naming it `apt-cache`.
